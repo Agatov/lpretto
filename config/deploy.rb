@@ -1,7 +1,7 @@
 # Bundler tasks
 require 'bundler/capistrano'
 
-set :application, "lpretto"
+set :application, "lp"
 set :repository,  "git@github.com:Agatov/lpretto"
 
 set :scm, :git

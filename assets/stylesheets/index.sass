@@ -1,0 +1,38 @@
+@font-face
+  font-family: 'HelveticaNeueCyr-Light'
+  src: url('/fonts/HelveticaNeueCyr-Light.otf') format("opentype")
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'HelveticaNeueCyr-Thin'
+  src: url('/fonts/HelveticaNeueCyr-Thin.otf') format("opentype")
+  font-weight: normal
+  font-style: normal
+
+body
+  padding: 0px
+  margin: 0px
+  font-family: 'HelveticaNeueCyr-Light', 'Helvetica', 'Arial', sans-serif
+  background: #fafafa
+  min-width: 1024px
+
+
+.wrapper
+  width: 960px
+  margin: 0px auto
+
+.clearfix
+  &:after
+    clear: both
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+
+.relative
+  position: relative
+
+.inheritance-height
+  height: 100%

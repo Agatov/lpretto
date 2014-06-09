@@ -36,25 +36,26 @@ class Application < Sinatra::Base
 
   post '/orders.json' do
 
-    message = "#{params[:order][:username]}. #{params[:order][:phone]}"
-    message += "\n"
-    message += params[:order][:email]
+    message = "#{params[:order][:username]}. #{params[:order][:phone]}. #{params[:order][:email]}"
 
-
+    if params[:order][:message]
+      message += "\n\n"
+      message += "#{params[:order][:message]}"
+    end
 
     Pony.mail ({
-      to: 'abardacha@gmail.com',
-      subject: I18n.t('email.title', locale: 'ru'),
-      body: message,
-      via: :smtp,
-      via_options: {
-        address: 'smtp.gmail.com',
-        port: 587,
-        enable_starttls_auto: true,
-        user_name: 'agatovs@gmail.com',
-        password: 'f1i4o9l2e4n9t',
-        authentication: :plain
-      }
+        to: 'abardacha@gmail.com',
+        subject: I18n.t('email.title', locale: 'ru'),
+        body: message,
+        via: :smtp,
+        via_options: {
+            address: 'smtp.gmail.com',
+            port: 587,
+            enable_starttls_auto: true,
+            user_name: 'abardacha@gmail.com',
+            password: 'fiolent149',
+            authentication: :plain
+        }
     })
 
     content_type :json

@@ -1,30 +1,20 @@
 $ ->
 
-
-
-  $('#show-form').on 'click', ->
-    $('.modal-overlay').show()
-    $('.modal-form').css('top', '-1000px')
-
-    $('.modal-overlay').unbind()
-    $('.modal-overlay').on 'click', ->
-      hide_form()
-
-    $('.modal-overlay').animate({'opacity' : '0.6'}, 200, ->
-      $('.modal-form').show()
-      $('.modal-form').animate({'top': '50%'}, 200)
+  $("#show-form").on 'click', ->
+    $('#intro').animate({opacity: 0}, 300, ->
+      $('#intro').hide()
+      $('.form').show()
+      $('.form').animate({opacity: 1}, 300)
     )
 
-  $('#hide-thank-you').on 'click', ->
-    hide_thank_you()
 
 
+  $('#order-button').on 'click', ->
 
-  $('#send-form').on 'click', ->
-
-    username = $(@).parent().find('input[name=username]')
-    phone = $(@).parent().find('input[name=phone]')
-    email = $(@).parent().find('input[name=email]')
+    username = $('input[name=username]')
+    phone = $('input[name=phone]')
+    email = $('input[name=email]')
+    message = $('input[name=message]')
 
     shake_fields = []
 
@@ -43,44 +33,32 @@ $ ->
       {
         'order[username]': username.val(),
         'order[phone]': phone.val(),
-        'order[email]': email.val()
-      }
+        'order[email]': email.val(),
+        'order[message]': message.val()
+      },
+      (data) =>
+
     )
 
+    show_thank_you()
+    reachGoal 'new_order'
 
-    $('.modal-form').animate({'top': '-1000px'}, 300, ->
-      show_thank_you()
-    )
-
-    reach_goal 'new_order'
-
-
-
-
-window.hide_form = ->
-  $('.modal-form').animate {'top': '-2000px'}, 500, ->
-    $('.modal-form').hide()
-    $('.modal-overlay').animate {'opacity': '0'}, 300, ->
-      $('.modal-overlay').hide()
-
+  $('.add-message').on 'click', ->
+    $(@).hide()
+    $('input.long').show()
 
 window.show_thank_you = ->
 
-  $('.modal-overlay').unbind()
-  $('.modal-overlay').on 'click', ->
-    hide_thank_you()
+  form_block = $('.form').find('.form-block')
 
-  $('.modal-thank-you').css('right', '-500px')
-  $('.modal-thank-you').show()
-  $('.modal-thank-you').animate({'right': '50%'}, 500, ->
-    $('input').val('')
+  form_block.animate({opacity: 0}, 1000, ->
+    form_block.hide()
+    thank_you_block = $('.form').find('.form-thank-you')
+    thank_you_block.show()
+    thank_you_block.animate({opacity: 1}, 1000, ->
+      $('input[type=text]').val('')
+    )
   )
-
-window.hide_thank_you = ->
-  $('.modal-thank-you').animate {'top': '-2000px'}, 500, ->
-    $('.modal-thank-you').hide()
-    $('.modal-overlay').animate {'opacity': '0'}, 300, ->
-      $('.modal-overlay').hide()
 
 
 window.shake_field = (field) ->
@@ -90,12 +68,12 @@ window.shake_field = (field) ->
 window.shake = (field, i) ->
 
   if i%2
-    field.animate({width: '-=30'}, 100)
+    field.animate({height: '-=15'}, 100)
   else
-    field.animate({width: '+=30'}, 100)
+    field.animate({height: '+=15'}, 100)
 
-window.reach_goal = (goal) ->
-  yaCounter24590714.reachGoal(goal)
 
+window.reachGoal = (goal) ->
+  yaCounter24427955.reachGoal goal
 
 
